@@ -50,10 +50,10 @@ def display_routes(net, client, server):
 
 def run_quic(client, server):
     print "Running quic client..."
-    client.sendCmd('/home/ubuntu/home/src_tarball/tarball/chromium/src/out/Debug/quic_client http://www.mit.edu/img/bckgrnd4.png  >/tmp/client-stdout 2>/tmp/client-stderr &')
+    client.sendCmd('cd /home/ubuntu/home/src_tarball/tarball/chromium/src/out/Debug && ./quic_client http://www.mit.edu/img/bckgrnd4.png  >/tmp/client-stdout 2>/tmp/client-stderr &')
     client.waitOutput()
     print "Running quic server..."
-    server.sendCmd('/home/ubuntu/home/src_tarball/tarball/chromium/src/out/Debug/quic_server >/tmp/server-stdout 2>/tmp/server-stderr &')
+    server.sendCmd('cd /home/ubuntu/home/src_tarball/tarball/chromium/src/out/Debug && ./quic_server >/tmp/server-stdout 2>/tmp/server-stderr &')
     server.waitOutput()
     print "done."
 
