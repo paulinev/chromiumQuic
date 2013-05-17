@@ -24,8 +24,8 @@ class QuicTester(Topo):
         Topo.__init__(self)
 
         # Add hosts and switches
-        client = self.addHost('client', ip='10.0.0.1', mac='00:00:00:00:00:01')
-        server = self.addHost('server', ip='10.0.0.2', mac='00:00:00:00:00:02')
+        client = self.addHost('client', ip='10.0.0.2', mac='00:00:00:00:00:02')
+        server = self.addHost('server', ip='10.0.0.1', mac='00:00:00:00:00:01')
 
         s1 = self.addSwitch('s1')
 
@@ -34,9 +34,9 @@ class QuicTester(Topo):
         self.addLink(s1, server)
 
 def set_all_IP(net, client, server):
-    client.sendCmd('ifconfig client-eth0 10.0.0.1 netmask 255.255.255.0')
+    client.sendCmd('ifconfig client-eth0 10.0.0.2 netmask 255.255.255.0')
     client.waitOutput()
-    server.sendCmd('ifconfig server-eth0 10.0.0.2 netmask 255.255.255.0')
+    server.sendCmd('ifconfig server-eth0 10.0.0.1 netmask 255.255.255.0')
     server.waitOutput()
 
 def display_routes(net, client, server):
@@ -49,10 +49,10 @@ def display_routes(net, client, server):
 
 def run_datagrump(client, server):
     print "Running quic client..."
-    client.sendCmd('/media/paulinev/fb55182f-b2f7-43ab-85a2-d3a763014241/chromium/src/out/Debug/quic_client  >/tmp/client-stdout 2>/tmp/client-stderr &')
+    client.sendCmd('/home/ubuntu/home/src_tarball/tarball/chromium/src/out/Debug/quic_client http://www.mit.edu/img/bckgrnd4.png  >/tmp/client-stdout 2>/tmp/client-stderr &')
     client.waitOutput()
     print "Running quic server..."
-    server.sendCmd('/media/paulinev/fb55182f-b2f7-43ab-85a2-d3a763014241/chromium/src/out/Debug/quic_server 10.0.0.1 60001 >/tmp/server-stdout 2>/tmp/server-stderr &')
+    server.sendCmd('/home/ubuntu/home/src_tarball/tarball/chromium/src/out/Debug/quic_server >/tmp/server-stdout 2>/tmp/server-stderr &')
     server.waitOutput()
     print "done."
 
