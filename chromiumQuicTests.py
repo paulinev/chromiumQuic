@@ -57,6 +57,12 @@ def run_quic(client, server):
     server.waitOutput()
     print "done."
 
+def check_for_directory():
+    var = os.system("[ -d 'home/ubuntu/home/src_tarball/tarball/chromium/src/out/Debug/www.mit.edu/' ]&&echo True||echo False")
+    if var == False:
+        return False
+    return True
+
 def run_quic_topology():
 
     # remove old files
@@ -74,7 +80,7 @@ def run_quic_topology():
 
     client = net.getNodeByName('client')
     server = net.getNodeByName('server')
-
+    
     set_all_IP(net, client, server)
     
     #Dump connections
@@ -87,4 +93,5 @@ def run_quic_topology():
 
     net.stop()
 
+#if check_for_directory():
 run_quic_topology()
