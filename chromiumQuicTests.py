@@ -27,6 +27,7 @@ class QuicTester(Topo):
         client = self.addHost('client', ip='10.0.0.2', mac='00:00:00:00:00:02')
         server = self.addHost('server', ip='10.0.0.1', mac='00:00:00:00:00:01')
 
+        # Add switch
         s1 = self.addSwitch('s1')
 
         # Add links
@@ -47,7 +48,7 @@ def display_routes(net, client, server):
     server.sendCmd('route -n')
     print server.waitOutput()
 
-def run_datagrump(client, server):
+def run_quic(client, server):
     print "Running quic client..."
     client.sendCmd('/home/ubuntu/home/src_tarball/tarball/chromium/src/out/Debug/quic_client http://www.mit.edu/img/bckgrnd4.png  >/tmp/client-stdout 2>/tmp/client-stderr &')
     client.waitOutput()
@@ -58,6 +59,7 @@ def run_datagrump(client, server):
 
 def run_quic_topology():
 
+    # kill old processes
     os.system( "killall -q controller" )
     os.system( "killall -q quic_client" )
     os.system( "killall -q quic_server" )
@@ -75,7 +77,7 @@ def run_quic_topology():
     dumpNodeConnections(net.hosts)
     display_routes(net, client, server)
 
-    run_datagrump(client, server)
+    run_quic(client, server)
 
     CLI(net)
 
