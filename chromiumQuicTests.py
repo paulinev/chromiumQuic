@@ -59,6 +59,10 @@ def run_quic(client, server):
 
 def run_quic_topology():
 
+    # remove old files
+    os.system( "rm /tmp/client-*")
+    os.system( "rm /tmp/server-*")
+
     # kill old processes
     os.system( "killall -q controller" )
     os.system( "killall -q quic_client" )
